@@ -1,0 +1,95 @@
+.menu {
+  position: fixed;
+  top: 0;
+  display: flex;
+flex-direction: column;
+justify-content: center;
+  left: -300px;
+  width: 300px;
+  height: 100vh;
+  background-color: rgba(215, 0, 0, 0.514);
+  filter: blur(1);
+  color: #fff;
+
+  transition: left 0.3s ease-in-out;
+}
+
+.menu.open {
+  left: 0;
+}
+
+.toggle-button {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 40px;
+  height: 30px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.toggle-button span {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 4px;
+  background-color: #fff;
+  transition: transform 0.3s ease-in-out;
+}
+
+.toggle-button span:nth-child(1) {
+  top: 0;
+  background-color: rgba(215, 0, 0);
+}
+
+.toggle-button span:nth-child(2) {
+  top: 13px;
+  background-color: rgba(215, 0, 0);
+}
+
+.toggle-button span:nth-child(3) {
+  background-color: rgba(215, 0, 0);
+  top: 26px;
+}
+
+.toggle-button.open span:nth-child(1) {
+  transform: rotate(45deg) translate(7px, 7px);
+}
+
+.toggle-button.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.toggle-button.open span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -7px);
+}
+.linksholder{
+  position: relative;
+  width: 100%;
+ padding: 10px;
+ margin: 15px;
+ height: 50px;
+}
+.routerlinks{
+  text-decoration: none;
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  transition: all  0.2s ease-in-out;
+
+
+
+}
+.routerlinks:hover{
+
+  transition: all  0.2s ease-in-out;
+
+}
+.routerlinks:hover{
+  font-size:21px ;
+  transition: all  0.2s ease-in-out;
+}

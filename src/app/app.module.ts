@@ -10,22 +10,29 @@ import { HomeComponent } from './home/home.component';
 import { FirebaseService } from './services/firebase.service';
 
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore/';
+import { Route, Router, RouterModule, Routes } from '@angular/router';
+import { DashBoardComponent } from './dash-board/dash-board.component';
+import { PolicememberComponent } from './policemember/policemember.component';
 
 
 
-
-
+ const routes:Routes = [
+     {path:"dashboard", component:DashBoardComponent},
+     {path:"members", component:PolicememberComponent}
+ ]
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    DashBoardComponent,
+    PolicememberComponent
   ],
   imports: [
     BrowserModule,
     AngularFireAuthModule,
     AppRoutingModule,
-
+    RouterModule.forRoot(routes),
     AngularFirestoreModule,
     AngularFireModule.initializeApp({
       apiKey: "AIzaSyA3IagzsUmfxlH6H6_EV16JG2BViwWZS3I",
@@ -39,6 +46,7 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore/';
     })
 
   ],
+  exports:[RouterModule] ,
   providers: [FirebaseService],
   bootstrap: [AppComponent]
 })

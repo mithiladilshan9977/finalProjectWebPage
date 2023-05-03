@@ -17,3 +17,27 @@
   margin-top: 10px;
   margin-bottom: 15px;
 }
+.imageholder{
+
+  position: relative;
+  float: left;
+  width: 950px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100vh;
+}
+.mainlogo{
+  position: relative;
+  max-width: 650px;
+  height: 650px;
+
+
+}
+.welcometext{
+  text-align: center;
+  color:rgb(215, 0, 0) ;
+ font-size:48px;
+ font-weight: bold;
+}

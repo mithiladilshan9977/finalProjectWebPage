@@ -23,6 +23,16 @@ export class AppComponent implements OnInit{
     this.isSignedIn = false
 
   }
+  async getuserdata(email:string,username:string,nicnumber:string,password:string,reenterpassword:string,policetation:string){
+
+    if(email.trim()==='' || username.trim()==='' || nicnumber==='' || policetation===''){
+      alert("Please provide all information");
+    } else{
+      await this.userRegisterService.userRegister(email,username,nicnumber,policetation)
+      this.isSignedIn = true
+    }
+
+   }
 
   async OnsignUp(email:string , password:string){
 
@@ -39,10 +49,9 @@ export class AppComponent implements OnInit{
     this.isSignedIn = false
    }
 
-   async getuserdata(email:string,username:string,nicnumber:string){
-    await this.userRegisterService.userRegister(email,username,nicnumber)
-    
-   }
+ getName(data:string):string{
+  return "dwad";
+ }
 
 
 

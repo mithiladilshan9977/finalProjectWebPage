@@ -1,12 +1,32 @@
+<div class="container imageholder" *ngIf="!isSignedIn">
+  <img  class="mainlogo" src="../assets/images/mainlogo.png" />
+
+  <p class="welcometext">Welcome to ECAS</p>
+
+</div>
+
+
+
 <div class="container mainoutdiv" *ngIf="!isSignedIn">
 
   <h2 class="signuptext">Sign up</h2>
   <input class="form-control inputfields" type="text" #username placeholder="Username"/>
   <input class="form-control inputfields" type="email" #emailSignup placeholder="Email address"/>
   <input class="form-control inputfields" type="text" #passwordSignup placeholder="Password"/>
-
+  <input class="form-control inputfields" type="text" #reenterpasswordSignup placeholder="Re enter Password"/>
+<p>{{username.value}}</p>
   <input  class="form-control inputfields" type="text" #nicnumber placeholder="NIC number"/>
-  <button class="btn btn-success" (click)="OnsignUp(emailSignup.value, passwordSignup.value)" (click)="getuserdata(emailSignup.value,username.value,nicnumber.value)"  >Register</button>
+
+  <select class="form-select inputfields" aria-label="Default select example" #policestation>
+    <option selected>Select your police station</option>
+    <option value="Nittambuwa">Nittambuwa</option>
+    <option value="Marawila">Marawila</option>
+    <option value="Kurunegala">Kurunegala</option>
+  </select>
+
+
+  <button class="btn btn-success" (click)="OnsignUp(emailSignup.value, passwordSignup.value)"
+  (click)="getuserdata(emailSignup.value,username.value,nicnumber.value,passwordSignup.value,reenterpasswordSignup.value,policestation.value)"  >Register</button>
 
 
   <div class="container" *ngIf="!isSignedIn">
@@ -19,7 +39,9 @@
 
 
 
+
 </div>
+
 
 
 <app-home *ngIf="isSignedIn" (isLogout)="handleLogout()"></app-home>
