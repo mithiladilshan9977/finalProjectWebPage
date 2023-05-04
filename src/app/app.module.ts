@@ -13,6 +13,7 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore/';
 import { Route, Router, RouterModule, Routes } from '@angular/router';
 import { DashBoardComponent } from './dash-board/dash-board.component';
 import { PolicememberComponent } from './policemember/policemember.component';
+// import { AngularFireDatabase } from 'angularfire2/database';
 
 
 
@@ -34,6 +35,7 @@ import { PolicememberComponent } from './policemember/policemember.component';
     AppRoutingModule,
     RouterModule.forRoot(routes),
     AngularFirestoreModule,
+
     AngularFireModule.initializeApp({
       apiKey: "AIzaSyA3IagzsUmfxlH6H6_EV16JG2BViwWZS3I",
       authDomain: "thridfinalyearproject.firebaseapp.com",

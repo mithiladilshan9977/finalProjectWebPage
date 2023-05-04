@@ -21,7 +21,7 @@
     "@angular/router": "^15.0.0",
     "angularfire2": "^5.4.2",
     "bootstrap": "^5.2.3",
-    "firebase": "^9.20.0",
+    "firebase": "^9.21.0",
     "jquery": "^3.6.4",
     "nodemon": "^2.0.22",
     "popper": "^1.0.1",
