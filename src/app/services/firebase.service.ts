@@ -1,13 +1,15 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Injectable({
   providedIn: 'root'
 })
-export class FirebaseService {
+export class FirebaseService  {
 
   isLoogedIn = false
   constructor(public firebaseAuth: AngularFireAuth ) { }
+
+
 
   async signIn(email: string , password : string){
     await this.firebaseAuth.signInWithEmailAndPassword(email, password).
@@ -25,10 +27,7 @@ export class FirebaseService {
       console.log(email,password )
     })
 
-    // this.db.list('Messages').valueChanges().subscribe((users) => {
-    //   console.log(users);
 
-    // });
 
 
   }

@@ -15,7 +15,9 @@ import { DashBoardComponent } from './dash-board/dash-board.component';
 import { PolicememberComponent } from './policemember/policemember.component';
 // import { AngularFireDatabase } from 'angularfire2/database';
 
-
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { RegisterServiceService } from './services/register-service.service';
+import { GetDataServiceService } from './services/get-data-service.service';
 
  const routes:Routes = [
      {path:"dashboard", component:DashBoardComponent},
@@ -30,9 +32,11 @@ import { PolicememberComponent } from './policemember/policemember.component';
     PolicememberComponent
   ],
   imports: [
+    AngularFireDatabaseModule,
     BrowserModule,
     AngularFireAuthModule,
     AppRoutingModule,
+
     RouterModule.forRoot(routes),
     AngularFirestoreModule,
 
@@ -49,7 +53,7 @@ import { PolicememberComponent } from './policemember/policemember.component';
 
   ],
   exports:[RouterModule] ,
-  providers: [FirebaseService],
+  providers: [FirebaseService,RegisterServiceService,GetDataServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

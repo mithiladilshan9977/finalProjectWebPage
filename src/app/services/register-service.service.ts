@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { getDatabase, onValue, ref, set } from "firebase/database";
 
@@ -6,7 +6,7 @@ import { getDatabase, onValue, ref, set } from "firebase/database";
 @Injectable({
   providedIn: 'root'
 })
-export class RegisterServiceService {
+export class RegisterServiceService  {
 
   uid: string | undefined;
   constructor(public afAuth: AngularFireAuth ) {
@@ -17,13 +17,11 @@ export class RegisterServiceService {
     })
   }
 
-  ngOnInit(): void {
 
 
-  }
 
   async userRegister(email:string,username:string,nicnumber:string, policetation:string){
-alert("User registed suucessfully");
+alert("You have registed suucessfully");
     const db = getDatabase();
 
   set(ref(db, 'HeadPolice/' +  policetation + this.uid), {
