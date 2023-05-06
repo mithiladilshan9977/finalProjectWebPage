@@ -19,11 +19,13 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { RegisterServiceService } from './services/register-service.service';
 import { GetDataServiceService } from './services/get-data-service.service';
 import { AllMembersComponent } from './all-members/all-members.component';
+import { PoliceManChatComponent } from './policemember/police-man-chat/police-man-chat.component';
 
  const routes:Routes = [
      {path:"dashboard", component:DashBoardComponent},
      {path:"members", component:PolicememberComponent},
-     {path:"allmembers",component:AllMembersComponent}
+     {path:"allmembers",component:AllMembersComponent},
+     {path:"policemember/police-man-chat",component:PoliceManChatComponent}
  ]
 
 @NgModule({
@@ -32,7 +34,8 @@ import { AllMembersComponent } from './all-members/all-members.component';
     HomeComponent,
     DashBoardComponent,
     PolicememberComponent,
-    AllMembersComponent
+    AllMembersComponent,
+    PoliceManChatComponent
   ],
   imports: [
     AngularFireDatabaseModule,
@@ -40,7 +43,7 @@ import { AllMembersComponent } from './all-members/all-members.component';
     AngularFireAuthModule,
     AppRoutingModule,
 
-    RouterModule.forRoot(routes),
+    RouterModule.forChild(routes),
     AngularFirestoreModule,
 
     AngularFireModule.initializeApp({

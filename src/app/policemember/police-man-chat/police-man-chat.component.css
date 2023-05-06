@@ -1,0 +1,42 @@
+.outerdiv{
+  width: 70%;
+  margin-top: 70px;
+
+  position: relative;
+  overflow-y: scroll;
+  height: 90vh;
+
+}
+.officerinfoholder{
+  position: relative;
+  width: 100%;
+  min-height: 30px;
+  background-color: rgb(216, 0, 0);
+  top: 0px;
+  left: 0px;
+}
+.gobackarrow{
+  width: 30px;
+  height: 30px;
+  margin: 10px;
+  cursor: pointer;
+  margin-right: 20px;
+}
+.officerName{
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  margin-top: 5px;
+}
+.messageHolder{
+  position: relative;
+  width: 100%;
+  margin: 5px;
+  background-color: rgba(216, 0, 0, 0.432);
+  border-radius: 15px;
+  padding: 10px;
+}
+.messgaeingo{
+  color: black;
+  font-size: 18px;
+}

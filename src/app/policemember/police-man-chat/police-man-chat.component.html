@@ -1,0 +1,20 @@
+
+
+
+<div class="container outerdiv">
+  <div class="container officerinfoholder">
+    <a routerLink="/members">
+    <img src="../../../assets/images/gobackarow.png" alt="Go back" title="Go back from here" class="gobackarrow"/>
+  </a>
+    <span class="officerName">{{officerName}} text chat with victim</span>
+  </div>
+
+  <div class="container messageHolder" *ngFor="let item of drivers">
+    <small class="messedate">{{item.messageDate}}</small>
+    <p class="messgaeingo"> {{item.meesageText}}</p>
+
+  </div>
+
+
+
+</div>

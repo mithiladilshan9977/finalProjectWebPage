@@ -1,4 +1,4 @@
-
+<router-outlet></router-outlet>
 <div class="container headingdiv">
   <h5 class="maintitle">Complained officers  <span class="numberofofficer"> {{drivers.length }}</span> </h5>
 
@@ -8,9 +8,14 @@
 <div class="container outerdiv" >
   <p>These are the  officers those who complained by the customers</p>
 
+
          <div class="memberholder" *ngFor="let driver of drivers">
 
+
           <img [src]="driver.profileImageUrl" (error)="driver.profileImageUrl='../../assets/images/customer_driver_prfile.png'" class="officerprofileimage">
+
+          <a [routerLink]="['//policemember/police-man-chat']" [queryParams]="{ officeruid: driver.uid, officername:driver.name }" class="gotochatpage">
+
 
           <div class="infoholder">
             <p class="infotext"><b>Officer name </b>    : {{ driver.name }} officer</p>
@@ -18,6 +23,7 @@
             <p class="infotext"><b>Description  </b>   : {{ driver.car }}</p>
 
           </div>
+        </a>
          </div>
 
 

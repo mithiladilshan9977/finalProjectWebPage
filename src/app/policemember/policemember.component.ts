@@ -23,7 +23,7 @@ export class PolicememberComponent {
   profileImageUrls: string[] = [];
   phones: string[] = [];
   cars: string[] = [];
-
+  uid:string[] =[];
   drivers: any[] = [];
 
 
@@ -67,12 +67,13 @@ constructor( public db: AngularFireDatabase){
                               name: data.name,
                               profileImageUrl: data.profileImageUrl,
                               phone: data.phone,
-                              car: data.car
+                              car: data.car,
+                              uid:messageOfficerpath
 
                             };
                             this.drivers.push(driver);
 
-                          console.log(this.drivers);
+
 
                           });
 
