@@ -1,36 +1,27 @@
-<div class="container outerdiv">
-         <div class="memberholder">
-          <img src="../../assets/images/customer_driver_prfile.png" alt="">
+
+<div class="container headingdiv">
+  <h5 class="maintitle">Complained officers  <span class="numberofofficer"> {{drivers.length }}</span> </h5>
+
+</div>
+
+
+<div class="container outerdiv" >
+  <p>These are the  officers those who complained by the customers</p>
+
+         <div class="memberholder" *ngFor="let driver of drivers">
+
+          <img [src]="driver.profileImageUrl" (error)="driver.profileImageUrl='../../assets/images/customer_driver_prfile.png'" class="officerprofileimage">
+
           <div class="infoholder">
-            <p class="infotext">Member name     : Mithila dilshan</p>
-            <p class="infotext">Phone number    : 077 2006589</p>
-            <p class="infotext">Description     : Mithila dilshan</p>
+            <p class="infotext"><b>Officer name </b>    : {{ driver.name }} officer</p>
+            <p class="infotext"><b>Phone number </b>   : {{ driver.phone }}</p>
+            <p class="infotext"><b>Description  </b>   : {{ driver.car }}</p>
 
           </div>
          </div>
 
 
-         <div class="memberholder">
-          <img src="../../assets/images/customer_driver_prfile.png" alt="">
-          <div class="infoholder">
-            <p class="infotext">Member name     : Mithila dilshan</p>
-            <p class="infotext">Phone number    : 077 2006589</p>
-            <p class="infotext">Description     : Amaila dilshan</p>
 
-
-          </div>
-         </div>
-
-
-         <div class="memberholder">
-          <img src="../../assets/images/customer_driver_prfile.png" alt="">
-          <div class="infoholder">
-            <p class="infotext">Member name     : Mithila dilshan</p>
-            <p class="infotext">Phone number    : 077 2006589</p>
-            <p class="infotext">Description     : Mithila dilshan</p>
-
-          </div>
-         </div>
 
 
 </div>

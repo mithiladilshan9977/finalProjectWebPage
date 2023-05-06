@@ -1,0 +1,31 @@
+
+<div class="container headingdiv">
+  <h5 class="maintitle">All officers  <span class="numberofofficer">{{drivers.length }}</span> </h5>
+
+</div>
+
+
+<div class="container outerdiv" >
+  <p>These are the  officers at your police station </p>
+
+         <div class="memberholder" *ngFor="let driver of drivers" >
+
+          <img [src]="driver.profileImageUrl" (error)="driver.profileImageUrl='../../assets/images/customer_driver_prfile.png'" class="officerprofileimage">
+
+          <div class="infoholder">
+            <p class="infotext"><b>Officer name </b>    : {{ driver.name ?driver.name:'No '}} officer</p>
+            <p class="infotext"><b>Phone number </b>   : {{ driver.phone ? driver.phone:'Not registered yet' }}</p>
+            <p class="infotext"><b>Description  </b>   : {{ driver.car ?driver.car:'Not registered yet'}}</p>
+
+          </div>
+         </div>
+
+
+
+
+
+
+
+
+</div>
+

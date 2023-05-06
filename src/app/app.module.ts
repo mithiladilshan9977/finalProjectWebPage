@@ -18,10 +18,12 @@ import { PolicememberComponent } from './policemember/policemember.component';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { RegisterServiceService } from './services/register-service.service';
 import { GetDataServiceService } from './services/get-data-service.service';
+import { AllMembersComponent } from './all-members/all-members.component';
 
  const routes:Routes = [
      {path:"dashboard", component:DashBoardComponent},
-     {path:"members", component:PolicememberComponent}
+     {path:"members", component:PolicememberComponent},
+     {path:"allmembers",component:AllMembersComponent}
  ]
 
 @NgModule({
@@ -29,7 +31,8 @@ import { GetDataServiceService } from './services/get-data-service.service';
     AppComponent,
     HomeComponent,
     DashBoardComponent,
-    PolicememberComponent
+    PolicememberComponent,
+    AllMembersComponent
   ],
   imports: [
     AngularFireDatabaseModule,
