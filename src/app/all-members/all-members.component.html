@@ -17,13 +17,16 @@
           <img [src]="driver.profileImageUrl" (error)="driver.profileImageUrl='../../assets/images/customer_driver_prfile.png'" class="officerprofileimage">
 
           <div class="infoholder">
-            <p class="infotext"><b>Police ID </b>      : 488d7 </p>
-            <p class="infotext"><b>NIC number </b>     : 978548755V</p>
+            <p class="infotext"><b>Police ID </b>      : {{ driver.policeID ? driver.policeID:'Not registered yet' }} </p>
+            <p class="infotext"><b>NIC number </b>     : {{ driver.NICnumber ? driver.NICnumber:'Not registered yet' }}</p>
             <p class="infotext"><b>Officer name </b>   : {{ driver.name ?driver.name:'No '}} officer</p>
             <p class="infotext"><b>Phone number </b>   : {{ driver.phone ? driver.phone:'Not registered yet' }}</p>
             <p class="infotext"><b>Description  </b>   : {{ driver.car ?driver.car:'Not registered yet'}}</p>
+            <p class="infotext"><b>Status  </b>   : {{ driver.status ?driver.status:'Not registered yet'}}</p>
 
+            <button class="btn btn-success" (click)="giveThePermission(driver.officerDataPath)">This is my officer</button>
           </div>
+
          </div>
 
 

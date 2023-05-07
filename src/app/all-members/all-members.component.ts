@@ -22,6 +22,14 @@ export class AllMembersComponent {
   profileImageUrls: string[] = [];
   phones: string[] = [];
   cars: string[] = [];
+  policeID: string[] = [];
+  NICnumber: string[] = [];
+  officerDataPath: string[] = [];
+  status: string[] = [];
+
+
+
+
 
   drivers: any[] = [];
   driver: { name: any; profileImageUrl: any; phone: any; car: any; };
@@ -39,7 +47,9 @@ export class AllMembersComponent {
     };
 
 
-    this.getUserData();
+  this.getUserData();
+
+
   }
   getUserData(){
 
@@ -61,10 +71,15 @@ export class AllMembersComponent {
                 name: data.name,
                 profileImageUrl: data.profileImageUrl,
                 phone: data.phone,
-                car: data.car
+                car: data.car,
+                policeID:data.policeIDNumber,
+                NICnumber:data.NICNumber,
+                status:data.status,
+                officerDataPath:"Users/Driver/"+offiverInformationPath
 
               };
               this.drivers.push(driver);
+
 
             console.log(this.drivers);
 
@@ -81,6 +96,17 @@ export class AllMembersComponent {
 
 
 
+  giveThePermission(updatePath : string){
 
+
+ const objectRef: AngularFireObject<any> = this.db.object(updatePath);
+
+ confirm('Do you want to proceed?') && objectRef.update({ status: "registered" })
+    .then(() => console.log('Node property updated successfully!'))
+    .catch((error) => console.log('Error updating node property: ', error));
+
+
+
+  }
 
 }
