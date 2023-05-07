@@ -2,15 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AngularFireDatabase,AngularFireObject  } from '@angular/fire/compat/database';
-
 @Component({
-  selector: 'app-police-man-chat',
-  templateUrl: './police-man-chat.component.html',
-  styleUrls: ['./police-man-chat.component.css']
+  selector: 'app-police-man-chat-image',
+  templateUrl: './police-man-chat-image.component.html',
+  styleUrls: ['./police-man-chat-image.component.css']
 })
-export class PoliceManChatComponent implements OnInit {
+export class PoliceManChatImageComponent implements OnInit{
 
-  myVariable: string='';
+myVariable: string='';
   data$: Observable<any> | undefined;
   data: any;
 
@@ -31,6 +30,10 @@ export class PoliceManChatComponent implements OnInit {
   officerUid: string;
   officerName: string;
 
+  isLarge:boolean  = false;
+  isLoading:boolean = false;
+
+
 
 
   constructor(private route: ActivatedRoute,public db: AngularFireDatabase) {
@@ -47,47 +50,54 @@ export class PoliceManChatComponent implements OnInit {
     this.route.queryParams.subscribe(params =>{
       this.officerUid = params['officeruid'] ;
       this.officerName = params['officername'] ;
-      this.gettingOfficerChatInfo();
+      this.gettingOfficerImages();
     })
     throw new Error('Method not implemented.');
   }
 
 
+  gettingOfficerImages(){
+    this.isLoading = false;
 
-  gettingOfficerChatInfo(){
-
-    this.db.list('Messages/'+this.officerUid+'/text', ref => ref.orderByKey().startAt(" "))
+    this.db.list('Messages/'+this.officerUid+'/image', ref => ref.orderByKey().startAt(" "))
     .snapshotChanges()
     .subscribe((snapshots) => {
       snapshots.forEach((snapshot) => {
         const object = snapshot.payload.val();
-        const getMessageTextpath = snapshot.key;
+        const getMessageImagepath = snapshot.key;
 
 
-        if( getMessageTextpath != null){
 
-          const objectRef: AngularFireObject<any> = this.db.object('Messages/'+this.officerUid+'/text/' + getMessageTextpath);
+        if( getMessageImagepath != null){
+
+          const objectRef: AngularFireObject<any> = this.db.object('Messages/'+this.officerUid+'/image/' + getMessageImagepath);
           this.data$ = objectRef.valueChanges();
           this.data$.subscribe(data => {
 
-            const driver = {
-              messageDate: data.dateTime,
-              meesageText: data.message,
 
 
+            const officerImages = {
+              imageMessage: data.mProfile
 
             };
-            this.drivers.push(driver);
-   
+            this.drivers.push(officerImages);
 
 
           });
 
 
+         }else{
+          console.log("not");
          }
 
       });
     });
 
   }
+
+  toggleImageSize(){
+    this.isLarge = !this.isLarge;
+  }
+
+
 }

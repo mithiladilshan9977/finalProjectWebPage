@@ -1,3 +1,8 @@
+<app-preloader *ngIf="isLoading"></app-preloader>
+<div *ngIf="!isLoading">
+
+
+
 <router-outlet></router-outlet>
 <div class="container headingdiv">
   <h5 class="maintitle">Complained officers  <span class="numberofofficer"> {{drivers.length }}</span> </h5>
@@ -14,7 +19,7 @@
 
           <img [src]="driver.profileImageUrl" (error)="driver.profileImageUrl='../../assets/images/customer_driver_prfile.png'" class="officerprofileimage">
 
-          <a [routerLink]="['//policemember/police-man-chat']" [queryParams]="{ officeruid: driver.uid, officername:driver.name }" class="gotochatpage">
+          <a [routerLink]="['/policemember/police-man-chat']" [queryParams]="{ officeruid: driver.uid, officername:driver.name }" class="gotochatpage">
 
 
           <div class="infoholder">
@@ -24,11 +29,14 @@
 
           </div>
         </a>
+        <a [routerLink]="['/policemember/police-man-chat-image']" [queryParams]="{ officeruid: driver.uid, officername:driver.name }" class="gotochatpage">
+              <img src="../../assets/images/messageImages.png" alt="" class="messageImage" style="width:60px;height:60px" title="see the images">
+            </a>
          </div>
-
 
 
 
 
 </div>
 
+</div>

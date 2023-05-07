@@ -1,0 +1,43 @@
+
+<app-preloader *ngIf="isLoading"></app-preloader>
+<div *ngIf="!isLoading">
+
+
+
+
+
+
+
+<div class="container outerdiv">
+  <div class="container officerinfoholder">
+    <a routerLink="/members">
+    <img src="../../../assets/images/gobackarow.png" alt="Go back" title="Go back from here" class="gobackarrow"/>
+  </a>
+    <span class="officerName"> {{officerName}} sent images by victim</span>
+  </div>
+
+  <div class="container messageHolder"  >
+
+    <div *ngIf="drivers.length === 0">
+      <p>No images are sent</p>
+    </div>
+
+    <div *ngFor="let image of drivers" class="container">
+
+
+
+      <img src="{{image.imageMessage}}" alt="" class="textImage" [ngClass]="{'large': isLarge}" (click)="toggleImageSize()">
+
+
+
+    </div>
+
+
+
+
+  </div>
+
+
+
+</div>
+</div>

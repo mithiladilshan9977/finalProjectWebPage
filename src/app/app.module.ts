@@ -20,12 +20,18 @@ import { RegisterServiceService } from './services/register-service.service';
 import { GetDataServiceService } from './services/get-data-service.service';
 import { AllMembersComponent } from './all-members/all-members.component';
 import { PoliceManChatComponent } from './policemember/police-man-chat/police-man-chat.component';
+import { PoliceManChatImageComponent } from './policemember/police-man-chat-image/police-man-chat-image.component';
+import { PreloaderComponent } from './preloader/preloader.component';
 
  const routes:Routes = [
      {path:"dashboard", component:DashBoardComponent},
      {path:"members", component:PolicememberComponent},
      {path:"allmembers",component:AllMembersComponent},
-     {path:"policemember/police-man-chat",component:PoliceManChatComponent}
+     {path:"policemember/police-man-chat",component:PoliceManChatComponent},
+     {path:"policemember/police-man-chat-image", component:PoliceManChatImageComponent},
+   
+
+
  ]
 
 @NgModule({
@@ -35,7 +41,9 @@ import { PoliceManChatComponent } from './policemember/police-man-chat/police-ma
     DashBoardComponent,
     PolicememberComponent,
     AllMembersComponent,
-    PoliceManChatComponent
+    PoliceManChatComponent,
+    PoliceManChatImageComponent,
+    PreloaderComponent
   ],
   imports: [
     AngularFireDatabaseModule,

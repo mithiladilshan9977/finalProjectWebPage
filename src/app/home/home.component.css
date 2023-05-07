@@ -10,7 +10,6 @@ justify-content: center;
   background-color: rgba(215, 0, 0, 0.514);
   filter: blur(1);
   color: #fff;
-
   transition: left 0.3s ease-in-out;
 }
 
@@ -40,16 +39,16 @@ justify-content: center;
 
 .toggle-button span:nth-child(1) {
   top: 0;
-  background-color: rgba(215, 0, 0);
+  background-color: rgb(240, 3, 3);
 }
 
 .toggle-button span:nth-child(2) {
   top: 13px;
-  background-color: rgba(215, 0, 0);
+  background-color: rgb(240, 3, 3);
 }
 
 .toggle-button span:nth-child(3) {
-  background-color: rgba(215, 0, 0);
+ background-color: rgb(240, 3, 3);
   top: 26px;
 }
 

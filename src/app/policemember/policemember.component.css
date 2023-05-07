@@ -43,3 +43,18 @@
 .gotochatpage{
   text-decoration: none;
 }
+.messageImage{
+  padding: 10px;
+  position: absolute;
+  right: 90px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+.messageImage:hover{
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  transition: all 0.2s ease-in-out;
+  padding: 10px;
+  background-color: rgba(240, 248, 255, 0.579);
+}

@@ -25,7 +25,7 @@ export class AllMembersComponent {
 
   drivers: any[] = [];
   driver: { name: any; profileImageUrl: any; phone: any; car: any; };
-
+  isLoading:boolean = false;
 
   constructor( public db: AngularFireDatabase){
     this.policeOfficerName = '';
@@ -42,6 +42,8 @@ export class AllMembersComponent {
     this.getUserData();
   }
   getUserData(){
+
+    this.isLoading = true;
          this.db.list('Users/Driver',ref => ref.orderByKey().startAt('Nitt')).snapshotChanges().subscribe((snapshots) =>{
           snapshots.forEach((snapshot)=>{
 
@@ -53,6 +55,7 @@ export class AllMembersComponent {
             const objectRef: AngularFireObject<any> = this.db.object('Users/Driver/' + offiverInformationPath);
             this.data$ = objectRef.valueChanges();
             this.data$.subscribe(data => {
+              this.isLoading = false;
 
               const driver = {
                 name: data.name,
