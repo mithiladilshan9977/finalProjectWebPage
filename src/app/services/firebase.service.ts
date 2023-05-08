@@ -1,5 +1,6 @@
 import { Injectable, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Route, Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -7,14 +8,15 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 export class FirebaseService  {
 
   isLoogedIn = false
-  constructor(public firebaseAuth: AngularFireAuth ) { }
-
+  constructor(public firebaseAuth: AngularFireAuth, public router: Router ) { }
 
 
   async signIn(email: string , password : string){
     await this.firebaseAuth.signInWithEmailAndPassword(email, password).
     then(res =>{
+      this.router.navigate(['/dashboard']);
       this.isLoogedIn = true
+
       localStorage.setItem('user', JSON.stringify(res.user))
     })
   }
@@ -22,9 +24,11 @@ export class FirebaseService  {
   async signUp(email: string , password : string){
     await this.firebaseAuth.createUserWithEmailAndPassword(email, password).
     then(res =>{
+      this.router.navigate(['/dashboard']);
+
       this.isLoogedIn = true
       localStorage.setItem('user', JSON.stringify(res.user))
-      console.log(email,password )
+
     })
 
 

@@ -29,6 +29,7 @@ export class PolicememberComponent {
 
   driver: { name: any; profileImageUrl: any; phone: any; car: any; };
   isLoading:boolean = false;
+  chekcingData:boolean = false;
 
 constructor( public db: AngularFireDatabase){
   this.policeOfficerName = '';
@@ -52,6 +53,10 @@ constructor( public db: AngularFireDatabase){
        this.db.list('Messages', ref => ref.orderByKey().startAt("Nittambuwa"))
         .snapshotChanges()
         .subscribe((snapshots) => {
+           if(snapshots.length == 0){
+            this.isLoading = false;
+            this.chekcingData = true;
+           }
           snapshots.forEach((snapshot) => {
             const object = snapshot.payload.val();
             const messageOfficerpath = snapshot.key;
@@ -62,7 +67,7 @@ constructor( public db: AngularFireDatabase){
               const objectRef: AngularFireObject<any> = this.db.object('Users/Driver/' + messageOfficerpath);
                           this.data$ = objectRef.valueChanges();
                           this.data$.subscribe(data => {
-                            this.isLoading = false;
+
 
                             const driver = {
                               name: data.name,

@@ -1,4 +1,8 @@
+
+
 <div class="container imageholder" *ngIf="!isSignedIn">
+<span *ngIf="showTheErrorMessage" class="showFormErrorMessage">{{showTheErrorMessage}}</span>
+
   <img  class="mainlogo" src="../assets/images/mainlogo.png" />
 
   <p class="welcometext">Welcome to ECAS</p>
@@ -10,11 +14,11 @@
 <div class="container mainoutdiv" *ngIf="!isSignedIn">
 
   <h2 class="signuptext">Sign up</h2>
-  <input class="form-control inputfields" type="text" #username placeholder="Username"/>
+  <input class="form-control inputfields" type="text" #username placeholder="Your name"/>
   <input class="form-control inputfields" type="email" #emailSignup placeholder="Email address"/>
-  <input class="form-control inputfields" type="text" #passwordSignup placeholder="Password"/>
-  <input class="form-control inputfields" type="text" #reenterpasswordSignup placeholder="Re enter Password"/>
-<p>{{username.value}}</p>
+  <input class="form-control inputfields" type="password" #passwordSignup placeholder="Password"/>
+  <input class="form-control inputfields" type="password" #reenterpasswordSignup placeholder="Re enter Password"/>
+
   <input  class="form-control inputfields" type="text" #nicnumber placeholder="NIC number"/>
 
   <select class="form-select inputfields" aria-label="Default select example" #policestation>

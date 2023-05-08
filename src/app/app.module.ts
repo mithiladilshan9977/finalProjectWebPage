@@ -22,6 +22,7 @@ import { AllMembersComponent } from './all-members/all-members.component';
 import { PoliceManChatComponent } from './policemember/police-man-chat/police-man-chat.component';
 import { PoliceManChatImageComponent } from './policemember/police-man-chat-image/police-man-chat-image.component';
 import { PreloaderComponent } from './preloader/preloader.component';
+import { FormsModule } from '@angular/forms';
 
  const routes:Routes = [
      {path:"dashboard", component:DashBoardComponent},
@@ -29,7 +30,7 @@ import { PreloaderComponent } from './preloader/preloader.component';
      {path:"allmembers",component:AllMembersComponent},
      {path:"policemember/police-man-chat",component:PoliceManChatComponent},
      {path:"policemember/police-man-chat-image", component:PoliceManChatImageComponent},
-   
+
 
 
  ]
@@ -50,7 +51,7 @@ import { PreloaderComponent } from './preloader/preloader.component';
     BrowserModule,
     AngularFireAuthModule,
     AppRoutingModule,
-
+    FormsModule,
     RouterModule.forChild(routes),
     AngularFirestoreModule,
 

@@ -9,9 +9,26 @@
 </div>
 
 
+
+
 <div class="container outerdiv" >
   <p>These are the  officers at your police station </p>
 
+  <input [(ngModel)]="searchTerm" type="text" placeholder="Search officer by name, NIC, policeID" (input)="filterOfficers()" class="form-control">
+ <div *ngIf="noSeractText">
+  <div *ngFor="let drivers of filteredOfficers"  >
+    <p>{{ drivers.name }}</p>
+    <p>{{ drivers.policeID }}</p>
+    <p>{{ drivers.NICnumber }}</p>
+  </div>
+
+  </div>
+
+
+ <!-- show the filltering data -->
+
+
+  <h1 *ngIf="chekingData">No data</h1>
          <div class="memberholder" *ngFor="let driver of drivers" >
 
           <img [src]="driver.profileImageUrl" (error)="driver.profileImageUrl='../../assets/images/customer_driver_prfile.png'" class="officerprofileimage">
@@ -25,6 +42,8 @@
             <p class="infotext"><b>Status  </b>   : {{ driver.status ?driver.status:'Not registered yet'}}</p>
 
             <button class="btn btn-success" (click)="giveThePermission(driver.officerDataPath)">This is my officer</button>
+            <button class="btn btn-danger removeOfficer" (click)="removeOfficer(driver.officerDataPath)">Remove this officer</button>
+
           </div>
 
          </div>

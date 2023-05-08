@@ -14,6 +14,14 @@
   <p>These are the  officers those who complained by the customers</p>
 
 
+
+ <div class="showNoDataMessage" *ngIf="chekcingData">
+  <img src="../../assets/images/nouser.png" alt="" class="nouserimage">
+
+  <p class="mt-2"><b>No chats yet</b></p>
+ </div>
+
+
          <div class="memberholder" *ngFor="let driver of drivers">
 
 

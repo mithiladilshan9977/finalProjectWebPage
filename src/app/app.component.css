@@ -41,3 +41,15 @@
  font-size:48px;
  font-weight: bold;
 }
+.showFormErrorMessage{
+  background-color: red;
+  position: absolute;
+  font-size: 20px;
+  padding: 10px;
+  margin-top: 10px;
+  top: 0px;
+  color: white;
+  border-radius: 15px;
+  box-shadow: 2px 2px 10px 5px rgba(0, 0, 0, 0.259);
+
+}

@@ -26,19 +26,22 @@ export class AllMembersComponent {
   NICnumber: string[] = [];
   officerDataPath: string[] = [];
   status: string[] = [];
+  chekingData:boolean = false;
 
-
-
-
+  filteredOfficers: any[] = [];
+  searchTerm: string = '';
 
   drivers: any[] = [];
   driver: { name: any; profileImageUrl: any; phone: any; car: any; };
   isLoading:boolean = false;
+  noSeractText:boolean = false;
 
   constructor( public db: AngularFireDatabase){
+
     this.policeOfficerName = '';
     this.policeOfficerPhone = '';
     this.policeOfficerDis = '';
+
     this.driver = {
       name: 'John',
       profileImageUrl: 'https://example.com/profile.png',
@@ -50,13 +53,37 @@ export class AllMembersComponent {
   this.getUserData();
 
 
+
   }
+
+  filterOfficers() {
+
+
+ if(this.searchTerm.trim() ===""){
+
+        this.noSeractText = false;
+ }
+ this.noSeractText = true;
+ console.log(this.searchTerm);
+    this.filteredOfficers = this.drivers.filter(driver => {
+      return driver.name.includes(this.searchTerm)||
+      driver.policeID.includes(this.searchTerm) ||
+      driver.NICnumber.includes(this.searchTerm)
+
+
+    });
+  }
+
+
   getUserData(){
 
     this.isLoading = true;
          this.db.list('Users/Driver',ref => ref.orderByKey().startAt('Nitt')).snapshotChanges().subscribe((snapshots) =>{
           snapshots.forEach((snapshot)=>{
-
+                if(snapshots.length ==0){
+                  this.isLoading = false;
+                  this.chekingData = true;
+                }
             const object = snapshot.payload.val();
             const offiverInformationPath = snapshot.key;
 
@@ -66,6 +93,7 @@ export class AllMembersComponent {
             this.data$ = objectRef.valueChanges();
             this.data$.subscribe(data => {
               this.isLoading = false;
+
 
               const driver = {
                 name: data.name,
@@ -81,7 +109,7 @@ export class AllMembersComponent {
               this.drivers.push(driver);
 
 
-            console.log(this.drivers);
+
 
             });
 
@@ -98,15 +126,18 @@ export class AllMembersComponent {
 
   giveThePermission(updatePath : string){
 
-
  const objectRef: AngularFireObject<any> = this.db.object(updatePath);
 
  confirm('Do you want to proceed?') && objectRef.update({ status: "registered" })
     .then(() => console.log('Node property updated successfully!'))
-    .catch((error) => console.log('Error updating node property: ', error));
 
+  }
+  removeOfficer(removePath : string){
 
+    const objectRef: AngularFireObject<any> = this.db.object(removePath);
 
+ confirm('Do you want to remove?') && objectRef.update({ status: "unregistered" })
+    .then(() => console.log('Node property updated successfully!'))
   }
 
 }

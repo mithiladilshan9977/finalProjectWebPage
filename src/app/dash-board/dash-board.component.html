@@ -1,3 +1,7 @@
+
+<app-preloader *ngIf="isLoading"></app-preloader>
+<div *ngIf="!isLoading">
+
 <div class="container headingdiv">
   <h5 class="maintitle">DashBoard</h5>
 </div>
@@ -6,14 +10,15 @@
 <div class="container outerdiv">
   <div class="memberdiv">
     <p class="membertitle">Members</p>
-    <p class="membercount">105</p>
+
+    <p class="membercount">{{drivers.length}}</p>
   </div>
 
 
   <div class="compaindiv">
     <p class="complaititle">Complains</p>
-    <p class="complaincount">50</p>
+    <p class="complaincount">{{driverssecond.length}}</p>
   </div>
 
 </div>
-
+</div>
