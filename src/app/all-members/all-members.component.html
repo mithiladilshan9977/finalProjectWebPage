@@ -15,14 +15,36 @@
   <p>These are the  officers at your police station </p>
 
   <input [(ngModel)]="searchTerm" type="text" placeholder="Search officer by name, NIC, policeID" (input)="filterOfficers()" class="form-control">
- <div *ngIf="noSeractText">
+ <div    [ngClass]="{'hide-element': searchTerm.trim() === ''}">
   <div *ngFor="let drivers of filteredOfficers"  >
-    <p>{{ drivers.name }}</p>
-    <p>{{ drivers.policeID }}</p>
-    <p>{{ drivers.NICnumber }}</p>
+
+    <div class="serachmemberholder">
+      <img [src]="drivers.profileImageUrl" (error)="drivers.profileImageUrl='../../assets/images/customer_driver_prfile.png'" class="officerprofileimage">
+
+    <div class="infoholder">
+    <p class="infotext"><b>Police ID </b>    :{{ drivers.policeID }}</p>
+    <p class="infotext"><b>NIC number </b>     :{{ drivers.NICnumber }}</p>
+    <p class="infotext"><b>Officer name </b>     : {{ drivers.name }}</p>
+    <p class="infotext"><b>Phone number </b>    : {{ drivers.phone }}</p>
+    <p class="infotext"><b>Description  </b>    :{{ drivers.car }}</p>
+    <p class="infotext"><b>Status  </b>     :{{ drivers.status }}</p>
+
+    <button class="btn btn-success" (click)="giveThePermission(drivers.officerDataPath)">This is my officer</button>
+    <button class="btn btn-danger removeOfficer" (click)="removeOfficer(drivers.officerDataPath)">Remove this officer</button>
+    
+  </div>
+
+
+
+</div>
+<hr>
   </div>
 
   </div>
+  <div *ngIf="checkTheUserAvaiableSearch"  [ngClass]="{'hide-element': searchTerm.trim() === ''}" class="showNoDataSearchError">
+    <p>No data matching for <b>'{{searchTerm}}'</b></p>
+  </div>
+
 
 
  <!-- show the filltering data -->

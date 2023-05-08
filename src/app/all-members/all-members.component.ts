@@ -34,7 +34,8 @@ export class AllMembersComponent {
   drivers: any[] = [];
   driver: { name: any; profileImageUrl: any; phone: any; car: any; };
   isLoading:boolean = false;
-  noSeractText:boolean = false;
+  checkTheUserAvaiableSearch:boolean = false;
+
 
   constructor( public db: AngularFireDatabase){
 
@@ -58,13 +59,9 @@ export class AllMembersComponent {
 
   filterOfficers() {
 
+    if(this.searchTerm.trim() ===""){}
 
- if(this.searchTerm.trim() ===""){
 
-        this.noSeractText = false;
- }
- this.noSeractText = true;
- console.log(this.searchTerm);
     this.filteredOfficers = this.drivers.filter(driver => {
       return driver.name.includes(this.searchTerm)||
       driver.policeID.includes(this.searchTerm) ||
@@ -72,6 +69,16 @@ export class AllMembersComponent {
 
 
     });
+
+    if(this.filteredOfficers.length ===0){
+this.checkTheUserAvaiableSearch = true;
+    }else{
+      this.checkTheUserAvaiableSearch = false;
+    }
+
+
+
+
   }
 
 
