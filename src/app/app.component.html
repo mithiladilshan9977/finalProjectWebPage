@@ -14,6 +14,7 @@
 <div class="container mainoutdiv" *ngIf="!isSignedIn">
 
   <h2 class="signuptext">Sign up</h2>
+
   <input class="form-control inputfields" type="text" #username placeholder="Your name"/>
   <input class="form-control inputfields" type="email" #emailSignup placeholder="Email address"/>
   <input class="form-control inputfields" type="password" #passwordSignup placeholder="Password"/>
@@ -29,13 +30,15 @@
   </select>
 
 
-  <button class="btn btn-success" (click)="OnsignUp(emailSignup.value, passwordSignup.value)"
-  (click)="getuserdata(emailSignup.value,username.value,nicnumber.value,passwordSignup.value,reenterpasswordSignup.value,policestation.value)"  >Register</button>
+  <button ty class="btn btn-success" (click)="getuserdata(emailSignup.value,username.value,nicnumber.value,passwordSignup.value,reenterpasswordSignup.value,policestation.value)"
+  (click)="OnSighUp(emailSignup.value ,passwordSignup.value )"
+  >Register</button>
 
+  <!-- (click)="OnSighUp(emailSignup.value,username.value,nicnumber.value,passwordSignup.value,reenterpasswordSignup.value,policestation.value)" -->
 
   <div class="container" *ngIf="!isSignedIn">
     <h2 class="signuptext">Sign In</h2>
-    <input class="form-control inputfields" type="text" #email placeholder="Email address"/>
+    <input class="form-control inputfields" type="email" #email placeholder="Email address"/>
     <input class="form-control inputfields" type="text" #password placeholder="Password">
     <button (click)="Onsignin(email.value, password.value)" class="btn btn-info">Sign in</button>
 
@@ -48,4 +51,4 @@
 
 
 
-<app-home *ngIf="isSignedIn" (isLogout)="handleLogout()"></app-home>
+<app-home *ngIf="isSignedIn" (isLogout)="handleLogout()" ></app-home>

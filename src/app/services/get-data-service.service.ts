@@ -78,9 +78,9 @@ export class GetDataServiceService implements OnInit {
 
 
 // const objectRef = this.db.object('Messages/Nittambuwac8HbfymlSsVRsZ1cADzvjNYCZeG2');
-  // objectRef.snapshotChanges().subscribe(snapshot => {
-  //   console.log(snapshot.key + "dwadawd");
-  // });
+//   objectRef.snapshotChanges().subscribe(snapshot => {
+//     console.log(snapshot.key + "dwadawd");
+//   });
 
 
   // this.db.list('Messages', ref => ref.orderByKey().startAt('Nittambuwa'))

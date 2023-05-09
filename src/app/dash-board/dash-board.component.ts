@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase,AngularFireObject  } from '@angular/fire/compat/database';
 import { Observable } from 'rxjs';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { getDatabase } from 'firebase/database';
 @Component({
   selector: 'app-dash-board',
   templateUrl: './dash-board.component.html',
@@ -33,12 +35,16 @@ export class DashBoardComponent  {
 
   driver: { name: any; profileImageUrl: any; phone: any; car: any; };
   isLoading:boolean = false;
+  uid: string  ;
 
-  constructor( public db: AngularFireDatabase){
+  user$: Observable<any> | undefined;
+
+  constructor( public db: AngularFireDatabase,public afAuth: AngularFireAuth ){
 
     this.policeOfficerName = '';
     this.policeOfficerPhone = '';
     this.policeOfficerDis = '';
+    this.uid = '';
     this.driver = {
       name: 'John',
       profileImageUrl: 'https://example.com/profile.png',
@@ -49,10 +55,71 @@ export class DashBoardComponent  {
 
   this.getUserData();
   this.getNumberOfComplains();
+  this.getOICStationLocation();
+
 
 
 
   }
+
+  getOICStationLocation(){
+    const db = getDatabase();
+
+
+    this.afAuth.authState.subscribe((user) =>{
+     if(user){
+
+      this.isLoading = true;
+      this.db.list('HeadPolice/',ref => ref.orderByKey().startAt(user.uid)).snapshotChanges().subscribe((snapshots) =>{
+       snapshots.forEach((snapshot)=>{
+
+         const object = snapshot.payload.val();
+         const OICpath = snapshot.key;
+          console.log(OICpath + "oooooooooooooic");
+
+
+       })
+      })
+
+     }
+   });
+
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   getUserData(){
 
     this.isLoading = true;

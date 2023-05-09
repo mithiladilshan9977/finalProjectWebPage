@@ -20,23 +20,31 @@ export class RegisterServiceService  {
 
 
 
-  async userRegister(email:string,username:string,nicnumber:string, policetation:string){
-alert("You have registed suucessfully");
-    const db = getDatabase();
-
-  set(ref(db, 'HeadPolice/' +  policetation + this.uid), {
-
-    username: username,
-    email: email,
-    nicnumber:nicnumber,
-    policesationname:policetation,
-
-  });
+//   async userRegister(email:string,username:string,nicnumber:string, policetation:string){
+// alert(this.uid);
+//     const db = getDatabase();
 
 
+//   set(ref(db, 'HeadPolice/' +  policetation + this.uid), {
+
+//     username: username,
+//     email: email,
+//     nicnumber:nicnumber,
+//     policesationname:policetation,
+
+//   });
+
+//   set(ref(db, 'HeadPolice/' +  this.uid), {
+
+//     policesationname:policetation
+
+//   });
 
 
-  }
+
+
+
+//   }
 
 }
 
