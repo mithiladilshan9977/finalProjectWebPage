@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { AngularFireDatabase,AngularFireObject  } from '@angular/fire/compat/database';
 import { Observable } from 'rxjs';
-
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { ref } from 'firebase/database';
+import { error } from 'console';
 @Component({
   selector: 'app-all-members',
   templateUrl: './all-members.component.html',
@@ -12,6 +14,11 @@ export class AllMembersComponent {
   myVariable: string='';
   data$: Observable<any> | undefined;
   data: any;
+
+  
+  OICdata$: Observable<any> | undefined;
+  OICdata: any;
+
 
   public policeOfficerName :string   ;
   policeOfficerPhone :string   ;
@@ -30,14 +37,18 @@ export class AllMembersComponent {
 
   filteredOfficers: any[] = [];
   searchTerm: string = '';
+  stationName:string[] =[];
+
 
   drivers: any[] = [];
+  officerInfoArray: any[] = [];
+  
   driver: { name: any; profileImageUrl: any; phone: any; car: any; };
   isLoading:boolean = false;
   checkTheUserAvaiableSearch:boolean = false;
 
 
-  constructor( public db: AngularFireDatabase){
+  constructor( public db: AngularFireDatabase,public afAuth: AngularFireAuth){
 
     this.policeOfficerName = '';
     this.policeOfficerPhone = '';
@@ -51,8 +62,8 @@ export class AllMembersComponent {
     };
 
 
-  this.getUserData();
-
+ 
+  this.getAllMembersData();
 
 
   }
@@ -82,52 +93,110 @@ this.checkTheUserAvaiableSearch = true;
   }
 
 
-  getUserData(){
+  getAllMembersData(){
+    //tacking oic station path
+    this.afAuth.authState.subscribe((user) =>{
+     if(user){
+     
 
-    this.isLoading = true;
-         this.db.list('Users/Driver',ref => ref.orderByKey().startAt('Nitt')).snapshotChanges().subscribe((snapshots) =>{
-          snapshots.forEach((snapshot)=>{
-                if(snapshots.length ==0){
-                  this.isLoading = false;
-                  this.chekingData = true;
-                }
-            const object = snapshot.payload.val();
-            const offiverInformationPath = snapshot.key;
-
-           if(offiverInformationPath?.includes("Nitt") && offiverInformationPath != null){
-
-            const objectRef: AngularFireObject<any> = this.db.object('Users/Driver/' + offiverInformationPath);
-            this.data$ = objectRef.valueChanges();
-            this.data$.subscribe(data => {
-              this.isLoading = false;
+                       this.db.list('HeadPolice/',ref => ref.orderByKey().startAt(user.uid).endAt(user.uid)).snapshotChanges().subscribe((snapshots) =>{
+                        snapshots.forEach((snapshot)=>{
+                          const object = snapshot.payload.val();
+                           const OfficerInfoPath = snapshot.key;
+                        
+                               if(OfficerInfoPath !=null){
+                                const objectRef: AngularFireObject<any> = this.db.object('HeadPolice/' + OfficerInfoPath);
+                                    this.OICdata$ = objectRef.valueChanges();
+                                    this.OICdata$.subscribe(data => {
+                                      this.isLoading = false;
 
 
-              const driver = {
-                name: data.name,
-                profileImageUrl: data.profileImageUrl,
-                phone: data.phone,
-                car: data.car,
-                policeID:data.policeIDNumber,
-                NICnumber:data.NICNumber,
-                status:data.status,
-                officerDataPath:"Users/Driver/"+offiverInformationPath
+                                      const driver = {
+                                        stationName: data.policesationname,
+                                        
 
-              };
-              this.drivers.push(driver);
+                                      };
+                                      this.officerInfoArray.push(driver);
+                                      const place = this.officerInfoArray[0].stationName ;
+                              
+                                     
+
+                                                   
+                                       
+                                      
+                                      this.isLoading = true;
+                                  
+                               
+
+                                      this.db.list('Users/Driver',ref => ref.orderByKey().startAt(place).endAt(place+ '\uf8ff')).snapshotChanges().subscribe((snapshots) =>{
+                                       snapshots.forEach((snapshot)=>{
+                                       
+                            
+
+                                             if(snapshots.length ==0){
+                                               this.isLoading = false;
+                                               this.chekingData = true;
+                                            
+                                             }  
+ 
+                                             
+                                              
+                                         const object = snapshot.payload.val();
+                                         const offiverInformationPath = snapshot.key;
+
+                                            
+
+                                        if(offiverInformationPath?.includes(place) && offiverInformationPath != null){
+                             
+                                         const objectRef: AngularFireObject<any> = this.db.object('Users/Driver/' + offiverInformationPath);
+                                         this.data$ = objectRef.valueChanges();
+                                         this.data$.subscribe(data => {
+                                           this.isLoading = false;
+                             
+                             
+                                           const driver = {
+                                             name: data.name,
+                                             profileImageUrl: data.profileImageUrl,
+                                             phone: data.phone,
+                                             car: data.car,
+                                             policeID:data.policeIDNumber,
+                                             NICnumber:data.NICNumber,
+                                             status:data.status,
+                                             officerDataPath:"Users/Driver/"+offiverInformationPath
+                             
+                                           };
+                                           this.drivers.push(driver);
+                             
+                             
+                             
+                             
+                                         });
+                             
+                             
+                             
+                                        }
+                             
+                             
+                                       })
+                                      })
+
+
+                                                //ednedn
+                                    });
+
+                                    }
 
 
 
 
-            });
+                           //end
+                        }) 
+                       })
+     }
+    });
 
-
-
-           }
-
-
-          })
-         })
   }
+ 
 
 
 
