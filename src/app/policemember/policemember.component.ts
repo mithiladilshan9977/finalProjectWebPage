@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Observable } from 'rxjs';
 import { AngularFireDatabase,AngularFireObject  } from '@angular/fire/compat/database';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 @Component({
   selector: 'app-policemember',
   templateUrl: './policemember.component.html',
@@ -26,12 +27,15 @@ export class PolicememberComponent {
   uid:string[] =[];
   drivers: any[] = [];
 
+  OICInfo: any[] = [];
+  OICdata$: Observable<any> | undefined;
+  OICdata: any;
 
   driver: { name: any; profileImageUrl: any; phone: any; car: any; };
   isLoading:boolean = false;
   chekcingData:boolean = false;
 
-constructor( public db: AngularFireDatabase){
+constructor( public db: AngularFireDatabase ,public afAuth: AngularFireAuth){
   this.policeOfficerName = '';
   this.policeOfficerPhone = '';
   this.policeOfficerDis = '';
@@ -43,52 +47,85 @@ constructor( public db: AngularFireDatabase){
   };
 
 
-  this.getUserData();
+  // this.getUserData();
+  this.getOICStationLocation();
+}
+
+getOICStationLocation(){
+  this.afAuth.authState.subscribe((user) =>{
+    if(user){
+
+       this.db.list("HeadPolice/" , ref => ref.orderByKey().startAt(user.uid).endAt(user.uid)).snapshotChanges().subscribe((snapshots) =>{
+        snapshots.forEach((snapshot) =>{
+          const object = snapshot.payload.val();
+          const OICpath = snapshot.key;
+
+             if(OICpath !=null){
+
+
+              const objectRef: AngularFireObject<any> = this.db.object('HeadPolice/' + OICpath);
+              this.OICdata$ = objectRef.valueChanges();
+              this.OICdata$.subscribe(data => {
+                   const driver = {
+                  stationName: data.policesationname,
+
+
+                };
+                this.OICInfo.push(driver);
+                const place = this.OICInfo[0].stationName ;
+
+                this.isLoading = true;
+                this.db.list("Messages/" , ref=>ref.orderByKey().startAt(place).endAt(place + '\uf8ff')).snapshotChanges().subscribe((snapshots) =>{
+                  snapshots.forEach((snapshot) =>{
+                    if(snapshots.length ==0){
+                      this.isLoading = false;
+                      this.chekcingData = true;
+                    }
+                    const object = snapshot.payload.val();
+                    const messageOfficerpath = snapshot.key;
+                     if(messageOfficerpath?.includes(place) && messageOfficerpath != null){
+
+                      const objectRef: AngularFireObject<any> = this.db.object('Users/Driver/' + messageOfficerpath);
+                      this.data$ = objectRef.valueChanges();
+                      this.data$.subscribe(data => {
+
+
+                        this.isLoading = false;
+
+                        const driver = {
+                          name: data.name,
+                          profileImageUrl: data.profileImageUrl,
+                          phone: data.phone,
+                          car: data.car,
+                          uid:messageOfficerpath
+
+                        };
+                        this.drivers.push(driver);
+
+
+                      });
+
+
+                     }
+
+                  })
+                })
+
+                //end
+
+              });
+
+
+
+
+             }
+        })
+       })
+    }
+});
 }
 
 
-
-  getUserData(){
-    this.isLoading = true;
-       this.db.list('Messages', ref => ref.orderByKey().startAt("Nittambuwa"))
-        .snapshotChanges()
-        .subscribe((snapshots) => {
-           if(snapshots.length == 0){
-            this.isLoading = false;
-            this.chekcingData = true;
-           }
-          snapshots.forEach((snapshot) => {
-            const object = snapshot.payload.val();
-            const messageOfficerpath = snapshot.key;
-
-
-            if(messageOfficerpath?.includes("Nitt") && messageOfficerpath != null){
-
-              const objectRef: AngularFireObject<any> = this.db.object('Users/Driver/' + messageOfficerpath);
-                          this.data$ = objectRef.valueChanges();
-                          this.data$.subscribe(data => {
-
-
-                            const driver = {
-                              name: data.name,
-                              profileImageUrl: data.profileImageUrl,
-                              phone: data.phone,
-                              car: data.car,
-                              uid:messageOfficerpath
-
-                            };
-                            this.drivers.push(driver);
-
-
-
-                          });
-
-             }
-
-          });
-        });
-
-   }
 
 //    passPoliceOfficerInfo(officerName:string, officerPhone:string , officerDiscription:string) {
 //     this.policeOfficerName = officerName;

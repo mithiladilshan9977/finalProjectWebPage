@@ -72,7 +72,7 @@ export class DashBoardComponent  {
 
 
       this.db.list('HeadPolice/',ref => ref.orderByKey().startAt(user.uid).endAt(user.uid)).snapshotChanges().subscribe((snapshots) =>{
-       snapshots.forEach((snapshot)=>{
+   snapshots.forEach((snapshot)=>{
 
          const object = snapshot.payload.val();
          const OICpath = snapshot.key;
@@ -95,8 +95,8 @@ export class DashBoardComponent  {
                                         snapshots.forEach((snapshot)=>{
                                               if(snapshots.length ==0){
                                                 this.isLoading = false;
-                                                 
-                                              } 
+
+                                              }
                                           const object = snapshot.payload.val();
                                           const offiverInformationPath = snapshot.key;
 
@@ -142,7 +142,7 @@ export class DashBoardComponent  {
                                          .subscribe((snapshots) => {
                                             if(snapshots.length == 0){
                                              this.isLoading = false;
-                                             
+
                                             }
 
                                            snapshots.forEach((snapshot) => {
